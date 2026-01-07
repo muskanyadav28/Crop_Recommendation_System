@@ -48,8 +48,24 @@ An intelligent crop recommendation system that uses Machine Learning to suggest 
 - **Link**: https://crop-recommendation-system-frontend-16dg.onrender.com/
 
 ## Local Development
+To run the project locally, follow these steps:
 
-### Backend Setup
+### Clone the Repository
+```bash
+git clone https://github.com/teambinfosys/Crop_Recommendation_System.git
+```
+### Navigate to the project directory
+```bash
+cd Crop_Recommendation_System
+```
+### Run Frontend
+```bash
+cd frontend
+```
+```bash
+python3 -m http.server 8000
+```
+### Backend Setup in other terminal
 ```bash
 cd backend
 ```
