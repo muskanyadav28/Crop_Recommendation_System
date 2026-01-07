@@ -52,7 +52,11 @@ An intelligent crop recommendation system that uses Machine Learning to suggest 
 ### Backend Setup
 ```bash
 cd backend
+```
+```bash
 pip install -r requirements.txt
+```
+```bash
 uvicorn main:app --reload
 ```
 
