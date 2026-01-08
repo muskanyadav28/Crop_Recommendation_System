@@ -182,7 +182,6 @@ select:focus {
     max-width: min(1400px, 95vw);
     margin: clamp(40px, 5vw, 60px) auto;
     padding: clamp(25px, 3vw, 40px) clamp(20px, 2.5vw, 30px);
-    background: #ffffff;
     border-radius: clamp(15px, 1.8vw, 20px);
 }
 
@@ -224,7 +223,7 @@ select:focus {
    LOCATION & WEATHER
 ===================== */
 .location-info {
-    background: #d0d0d0;
+    background: #e8ecf1;
     border-radius: clamp(15px, 1.8vw, 20px);
     padding: clamp(15px, 2vw, 25px) clamp(25px, 3.5vw, 50px);
     display: inline-block;
@@ -271,7 +270,7 @@ select:focus {
    CROP CARD
 ===================== */
 .crop-card {
-    background: #e5e5e5;
+    
     border-radius: clamp(20px, 2.5vw, 30px);
     position: relative;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
