@@ -11,7 +11,9 @@ body {
     padding: 20px;
 }
 
-/* Header Styles */
+/* =====================
+   HEADER
+===================== */
 .header {
     display: flex;
     align-items: center;
@@ -25,7 +27,9 @@ body {
     font-size: 40px;
 }
 
-/* Main Title Styles */
+/* =====================
+   HOME SECTION
+===================== */
 .main-title {
     font-size: 48px;
     font-weight: bold;
@@ -42,7 +46,6 @@ body {
     align-items: center;
 }
 
-/* Left Section Styles */
 .left-section {
     padding: 30px;
 }
@@ -54,7 +57,9 @@ body {
     font-family: 'Courier New', monospace;
 }
 
-/* Form Container Styles */
+/* =====================
+   FORM CONTAINER
+===================== */
 .form-container {
     background: #e8ecf1;
     border-radius: 30px;
@@ -99,7 +104,7 @@ input[type="number"] {
 
 input[type="text"]::placeholder,
 input[type="number"]::placeholder {
-    color: #2c3e50;
+    color: #7f8c8d;
 }
 
 input:focus,
@@ -107,6 +112,9 @@ select:focus {
     outline: 3px solid #74b9ff;
 }
 
+/* =====================
+   NUTRIENTS SECTION
+===================== */
 .nutrients-section {
     margin-top: 35px;
 }
@@ -134,6 +142,9 @@ select:focus {
     display: block;
 }
 
+/* =====================
+   SUBMIT BUTTON
+===================== */
 .submit-btn {
     width: 70%;
     padding: 20px;
@@ -167,10 +178,10 @@ select:focus {
    RESULTS SECTION
 ===================== */
 .results-section {
-    max-width: 95%;
-    margin: 60px 60px 0px 60px;
+    max-width: 1400px;
+    margin: 60px auto;
     padding: 40px 30px;
-    background: #f8f9fa;
+    background: #ffffff;
     border-radius: 20px;
 }
 
@@ -178,17 +189,15 @@ select:focus {
     display: none;
 }
 
-.results-section.show {
-    display: block;
-    animation: fadeIn 0.5s ease-in;
+.results-section:not(.hidden) {
+    animation: fadeIn 0.6s ease-in;
 }
 
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -196,7 +205,7 @@ select:focus {
 }
 
 /* =====================
-   HEADER
+   RESULTS HEADER
 ===================== */
 .results-header {
     text-align: center;
@@ -204,44 +213,44 @@ select:focus {
 }
 
 .results-header h2 {
-    font-size: 48px;
+    font-size: 56px;
     font-weight: 800;
     margin-bottom: 30px;
     color: #000;
 }
 
 /* =====================
-   LOCATION + WEATHER BAR
+   LOCATION & WEATHER
 ===================== */
 .location-info {
-    background: #d8d8d8;
-    border-radius: 15px;
-    padding: 20px 40px;
+    background: #d0d0d0;
+    border-radius: 20px;
+    padding: 25px 50px;
     display: inline-block;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    margin-left: 30%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
 .location-text {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
 }
 
 .location-icon {
-    font-size: 24px;
+    font-size: 28px;
 }
 
 .weather-info {
     display: flex;
     justify-content: center;
-    gap: 30px;
-    font-size: 18px;
+    gap: 35px;
+    font-size: 20px;
     font-weight: 500;
+    color: #2c3e50;
 }
 
 /* =====================
@@ -250,8 +259,8 @@ select:focus {
 .cards-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-top: 50px;
+    gap: 40px;
+    margin-top: 60px;
     padding: 0 20px;
 }
 
@@ -259,13 +268,17 @@ select:focus {
    CROP CARD
 ===================== */
 .crop-card {
-    background: #e8e8e8;
-    border-radius: 25px;
-    padding: 0;
+    background: #e5e5e5;
+    border-radius: 30px;
     position: relative;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    text-align: center;
-    overflow: visible;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.crop-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 /* =====================
@@ -275,16 +288,16 @@ select:focus {
     position: absolute;
     top: 15px;
     left: 15px;
-    width: 55px;
-    height: 55px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: bold;
     z-index: 10;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .rank-1 {
@@ -303,14 +316,12 @@ select:focus {
 }
 
 /* =====================
-   IMAGE
+   CROP IMAGE
 ===================== */
 .crop-image-container {
     width: 100%;
-    height: 200px;
-    position: relative;
+    height: 220px;
     overflow: hidden;
-    border-radius: 25px 25px 0 0;
 }
 
 .crop-image {
@@ -320,49 +331,49 @@ select:focus {
 }
 
 /* =====================
-   DETAILS
+   CROP DETAILS
 ===================== */
 .crop-details {
+    padding: 30px 25px;
     text-align: center;
-    padding: 25px;
-}
-
-.crop-name {
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    color: #000;
-    display: block;
-    /* Crop name now visible below accuracy badge */
 }
 
 /* =====================
-   ACCURACY PILL
+   ACCURACY BADGE
 ===================== */
 .accuracy-badge {
     display: inline-block;
     background: #9a9a9a;
     color: #000;
-    font-size: 32px;
+    font-size: 36px;
     font-weight: bold;
-    padding: 10px 50px;
+    padding: 12px 60px;
     border-radius: 50px;
     margin-bottom: 20px;
 }
 
 /* =====================
-   STATS
+   CROP NAME
+===================== */
+.crop-name {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #000;
+}
+
+/* =====================
+   CROP STATS
 ===================== */
 .crop-stats {
     margin-top: 20px;
     text-align: left;
-    padding-left: 10px;
+    padding-left: 15px;
 }
 
 .stat-item {
-    font-size: 16px;
-    padding: 6px 0;
+    font-size: 17px;
+    padding: 7px 0;
     font-weight: 600;
     color: #000;
 }
@@ -370,37 +381,68 @@ select:focus {
 .stat-item::before {
     content: "• ";
     font-weight: bold;
-    margin-right: 5px;
-}
-
-.stat-label {
-    font-weight: 600;
-}
-
-.stat-value {
-    font-weight: 600;
-}
-
-.stat-item.profit {
-    display: none;
-    /* Hide profit as it's not in the reference */
+    margin-right: 8px;
 }
 
 /* =====================
    RESPONSIVE
 ===================== */
-@media (max-width: 900px) {
+@media (max-width: 1200px) {
+    .container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .form-container {
+        margin-right: 0;
+    }
+
+    .cards-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
     .cards-container {
         grid-template-columns: 1fr;
-        gap: 25px;
+        gap: 30px;
     }
 
     .results-header h2 {
+        font-size: 42px;
+    }
+
+    .main-title {
         font-size: 36px;
+    }
+
+    .nutrients-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .weather-info {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .location-info {
+        padding: 20px 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .submit-btn {
+        width: 90%;
+        margin-left: 5%;
+        font-size: 24px;
     }
 
     .accuracy-badge {
         font-size: 28px;
-        padding: 8px 40px;
+        padding: 10px 40px;
+    }
+
+    .crop-name {
+        font-size: 22px;
     }
 }
