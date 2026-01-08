@@ -37,9 +37,11 @@
                         </select>
                     </div>
                     <div class="form-row">
-                        <select name="village" required>
+                        <!-- <select name="village" required>
                             <option value="">Village</option>
-                        </select>
+                        </select> -->
+                         <input type="text" name="village" placeholder="Village">
+                    <!-- user can fill manually -->
                         <select name="season" required>
                             <option value="">Season</option>
                             <option value="Zayad">Zayad(Mar - May)</option>
@@ -71,10 +73,10 @@
                                 <option value="loam">Loam</option>
                             </select>
                         </div>
-                        <div>
+                        <!-- <div>
                             <label>Labor Cost</label>
                             <input type="number" name="labor_cost" placeholder="Enter Cost" required>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -106,6 +108,35 @@
             </form>
         </div>
     </div>
+     
+   <!-- Result Section -->
+    <section id="resultSection" class="hidden">
+        <h1>Top Crops Recommendations</h1>
+         
+ <div class="location-bar">
+        📍 <span id="locationText">Village, District, State</span>
+        <span>🌡 temp:xc</span>
+        <span>💧 Humidity: 72%</span>
+        <span>🌧 Rainfall: 205mm</span>
+    </div>
+
+        <div class="card-container">
+            <div class="card">
+                <h3 id="crop1"></h3>
+                <p id="desc1"></p>
+            </div>
+
+            <div class="card">
+                <h3 id="crop2"></h3>
+                <p id="desc2"></p>
+            </div>
+
+            <div class="card">
+                <h3 id="crop3"></h3>
+                <p id="desc3"></p>
+            </div>
+        </div>
+    </section>
 
     <script src="script.js"></script>
 </body>
