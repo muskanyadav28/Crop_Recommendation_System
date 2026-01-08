@@ -44,7 +44,7 @@ const cropImages = {
     'mango': 'static/images/mango.avif',
     'grapes': 'static/images/grapes.avif',
     'orange': 'static/images/orange.webp',
-    'papaya': 'static/images/papaya.webp',
+    'papaya': 'static/images/papaya.avif',
     'coconut': 'static/images/coconut.avif',
     'pomegranate': 'static/images/pomegranate.avif',
     'coffee': 'static/images/coffee.avif',
