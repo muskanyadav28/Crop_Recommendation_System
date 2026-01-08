@@ -1,62 +1,66 @@
 document.addEventListener("DOMContentLoaded", function () {
 
+  const stateSelect = document.querySelector('select[name="state"]');
+  const districtSelect = document.querySelector('select[name="district"]');
+  const villageInput = document.querySelector('input[name="village"]'); 
 
-
-const stateSelect = document.querySelector('select[name="state"]');
-const districtSelect = document.querySelector('select[name="district"]');
-const villageSelect = document.querySelector('select[name="village"]');
-
-// Load states
-fetch("https://countriesnow.space/api/v0.1/countries/states", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ country: "India" })
-})
-.then(res => res.json())
-.then(data => {
-  data.data.states.forEach(state => {
-    const option = document.createElement("option");
-    option.value = state.name;
-    option.textContent = state.name;
-    stateSelect.appendChild(option);
-  });
-})
-.catch(err => console.error("State load error:", err));
-
-// Load districts when state changes
-stateSelect.addEventListener("change", () => {
-  districtSelect.innerHTML = `<option value="">District</option>`;
-//   villageSelect.innerHTML = `<option value="">Village</option>`;
-
-  if (!stateSelect.value) return;
-
-  fetch("https://countriesnow.space/api/v0.1/countries/state/cities", {
+  // Load states
+  fetch("https://countriesnow.space/api/v0.1/countries/states", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      country: "India",
-      state: stateSelect.value
-    })
+    body: JSON.stringify({ country: "India" })
   })
   .then(res => res.json())
   .then(data => {
-    data.data.forEach(district => {
+    data.data.states.forEach(state => {
       const option = document.createElement("option");
-      option.value = district;
-      option.textContent = district;
-      districtSelect.appendChild(option);
+      option.value = state.name;
+      option.textContent = state.name;
+      stateSelect.appendChild(option);
     });
   })
-  .catch(err => console.error("District load error:", err));
-});
+  .catch(err => console.error("State load error:", err));
 
+  // Load districts
+  stateSelect.addEventListener("change", () => {
+    districtSelect.innerHTML = `<option value="">District</option>`;
 
-// this is for final submittion and showing recommendaded crops
-document.getElementById("cropForm").addEventListener("submit", function (e) {
+    if (!stateSelect.value) return;
+
+    fetch("https://countriesnow.space/api/v0.1/countries/state/cities", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        country: "India",
+        state: stateSelect.value
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      data.data.forEach(district => {
+        const option = document.createElement("option");
+        option.value = district;
+        option.textContent = district;
+        districtSelect.appendChild(option);
+      });
+    })
+    .catch(err => console.error("District load error:", err));
+  });
+
+  // FORM SUBMIT
+  document.getElementById("cropForm").addEventListener("submit", function (e) {
     e.preventDefault();
 
-    // Example recommendation (replace with ML / backend later)
-    // add this to the backend later
+    // ✅ Read user-entered location
+    const village = villageInput.value || "Village";
+    const district = districtSelect.value || "District";
+    const state = stateSelect.value || "State";
+
+    // ✅ Update result section text
+    document.getElementById("locationText").textContent =
+      `${village}, ${district}, ${state}`;
+
+    // Dummy recommendations will connect this fields to ML later
     const recommendations = [
       { name: "Wheat", desc: "Best for rabi season and loamy soil." },
       { name: "Rice", desc: "Needs high water and warm climate." },
@@ -71,16 +75,11 @@ document.getElementById("cropForm").addEventListener("submit", function (e) {
 
     document.getElementById("crop3").textContent = recommendations[2].name;
     document.getElementById("desc3").textContent = recommendations[2].desc;
-     
 
-
-    
-    // Show and scroll to result
+    // Show & scroll
     const resultSection = document.getElementById("resultSection");
     resultSection.classList.remove("hidden");
     resultSection.scrollIntoView({ behavior: "smooth" });
   });
 
 });
-
-
