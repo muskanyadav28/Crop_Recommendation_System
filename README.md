@@ -97,10 +97,10 @@ The system uses ML models trained on agricultural data to predict suitable crops
 Contributions are welcome! Feel free to submit issues and pull requests.
 
 ## 👥 Team
-- **Member 1**: [Muskan Yadav](https://github.com/muskanyadav28) - Team Lead
-- **Member 2**: [Priya Tiwari](https://github.com/2110priyatiwari) - Frontend Developer
-- **Member 3**: [Murali Krishna](https://github.com/your-github-profile) - Backend Developer
-- **Member 4**: [Shaik Khaja](https://github.com/khaja-shaik-21) - ML Engineer
+- **Member 1**: [Shaik Khaja](https://github.com/khaja-shaik-21)
+- **Member 2**: [Muskan Yadav](https://github.com/muskanyadav28)
+- **Member 3**: [Priya Tiwari](https://github.com/2110priyatiwari)
+- **Member 4**: [Murali Krishna](https://github.com/your-github-profile)
 
 ---
 
