@@ -40,9 +40,9 @@ try:
     soil_encoder = joblib.load(SOIL_ENCODER_PATH)
     season_encoder = joblib.load(SEASON_ENCODER_PATH)
     crop_encoder = joblib.load(CROP_ENCODER_PATH)
-    logger.info("✅ ML model & encoders loaded successfully")
+    logger.info("ML model & encoders loaded successfully")
 except Exception as e:
-    logger.error(f"❌ Error loading models: {e}")
+    logger.error(f"Error loading models: {e}")
     raise
 
 # ================== STATIC FILES ==================
@@ -208,7 +208,7 @@ def get_weather(lat: float, lon: float, season: str):
 @app.post("/api/recommend")
 def recommend_crop(data: CropRequest):
     try:
-        logger.info(f"📥 Received request for {data.village}, {data.district}, {data.state}")
+        logger.info(f"Received request for {data.village}, {data.district}, {data.state}")
         
         # Normalize inputs
         soil_clean = normalize_label(data.soil_type)
@@ -244,7 +244,7 @@ def recommend_crop(data: CropRequest):
             season_encoded
         ]])
         
-        logger.info(f"🔢 Features prepared: {features[0]}")
+        logger.info(f"Features prepared: {features[0]}")
         
         # Get predictions
         probs = model.predict_proba(features)[0]
@@ -268,7 +268,7 @@ def recommend_crop(data: CropRequest):
                 "expected_returns": eco["returns"]
             })
         
-        logger.info(f"✅ Top 3 crops: {[r['crop'] for r in recommendations]}")
+        logger.info(f"Top 3 crops: {[r['crop'] for r in recommendations]}")
         
         return {
             "state": data.state,
@@ -283,7 +283,7 @@ def recommend_crop(data: CropRequest):
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"❌ Unexpected error: {e}", exc_info=True)
+        logger.error(f"Unexpected error: {e}", exc_info=True)
         raise HTTPException(
             status_code=500,
             detail="An unexpected error occurred. Please try again."
