@@ -2,10 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.so
 .Python
-env/
-venv/
-ENV/
 build/
 develop-eggs/
 dist/
@@ -22,7 +20,13 @@ wheels/
 .installed.cfg
 *.egg
 
-# IDEs
+# Virtual Environment
+venv/
+ENV/
+env/
+.venv
+
+# IDE
 .vscode/
 .idea/
 *.swp
@@ -33,14 +37,25 @@ wheels/
 .DS_Store
 Thumbs.db
 
-# Cache
-.cache/
-.cache.sqlite
-*.sqlite
-
 # Logs
 *.log
 
-# Environment
+# Environment variables
 .env
 .env.local
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pytest
+.pytest_cache/
+
+# Coverage
+htmlcov/
+.coverage
+.coverage.*
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json

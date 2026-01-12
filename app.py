@@ -29,13 +29,34 @@ app.add_middleware(
 # ================== PATH SETUP ==================
 BASE_DIR = Path(__file__).resolve().parent
 
-MODEL_PATH = BASE_DIR / "Backend" / "ml" / "models" / "crop_recommendation_model.pkl"
-SOIL_ENCODER_PATH = BASE_DIR / "Backend" / "ml" / "models" / "soil_encoder.pkl"
-SEASON_ENCODER_PATH = BASE_DIR / "Backend" / "ml" / "models" / "season_encoder.pkl"
-CROP_ENCODER_PATH = BASE_DIR / "Backend" / "ml" / "models" / "crop_encoder.pkl"
+# Try multiple possible model paths
+def find_model_file(filename):
+    """Search for model files in multiple possible locations"""
+    possible_paths = [
+        BASE_DIR / "Backend" / "ml" / "models" / filename,
+        BASE_DIR / "ml" / "models" / filename,
+        BASE_DIR / "models" / filename,
+        BASE_DIR / filename
+    ]
+    
+    for path in possible_paths:
+        if path.exists():
+            logger.info(f"Found {filename} at: {path}")
+            return path
+    
+    # If not found, log all attempted paths
+    logger.error(f"Could not find {filename}. Tried:")
+    for path in possible_paths:
+        logger.error(f"  - {path}")
+    raise FileNotFoundError(f"Model file {filename} not found")
 
 # ================== LOAD MODEL & ENCODERS ==================
 try:
+    MODEL_PATH = find_model_file("crop_recommendation_model.pkl")
+    SOIL_ENCODER_PATH = find_model_file("soil_encoder.pkl")
+    SEASON_ENCODER_PATH = find_model_file("season_encoder.pkl")
+    CROP_ENCODER_PATH = find_model_file("crop_encoder.pkl")
+    
     model = joblib.load(MODEL_PATH)
     soil_encoder = joblib.load(SOIL_ENCODER_PATH)
     season_encoder = joblib.load(SEASON_ENCODER_PATH)
@@ -46,24 +67,48 @@ except Exception as e:
     raise
 
 # ================== STATIC FILES ==================
-static_path = BASE_DIR / "static"
-if static_path.exists():
+# Try multiple possible static paths
+static_paths = [
+    BASE_DIR / "static",
+    BASE_DIR / "public",
+    BASE_DIR / "frontend"
+]
+
+static_path = None
+for path in static_paths:
+    if path.exists():
+        static_path = path
+        logger.info(f"Found static files at: {path}")
+        break
+
+if static_path:
     app.mount("/static", StaticFiles(directory=str(static_path)), name="static")
+else:
+    logger.warning("No static directory found")
 
 # ================== ROOT ==================
 @app.get("/")
 async def read_root():
-    index_path = BASE_DIR / "static" / "index.html"
-    if index_path.exists():
-        return FileResponse(str(index_path))
-    return {"message": "Crop Recommendation System API", "docs": "/docs"}
+    """Root endpoint - serves index.html or API info"""
+    if static_path:
+        index_path = static_path / "index.html"
+        if index_path.exists():
+            return FileResponse(str(index_path))
+    return {
+        "message": "Crop Recommendation System API",
+        "status": "running",
+        "docs": "/docs",
+        "health": "/health"
+    }
 
 @app.get("/health")
 async def health_check():
+    """Health check endpoint"""
     return {
         "status": "healthy",
         "service": "Crop Recommendation System",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "models_loaded": True
     }
 
 # ================== ECONOMICS (PER ACRE) ==================
@@ -214,7 +259,7 @@ def recommend_crop(data: CropRequest):
         soil_clean = normalize_label(data.soil_type)
         season_clean = normalize_label(data.season)
         
-        logger.info(f"🌱 Soil: {soil_clean}, Season: {season_clean}")
+        logger.info(f"Soil: {soil_clean}, Season: {season_clean}")
         
         # Encode categorical features
         try:
@@ -288,6 +333,16 @@ def recommend_crop(data: CropRequest):
             status_code=500,
             detail="An unexpected error occurred. Please try again."
         )
+
+# ================== STARTUP EVENT ==================
+@app.on_event("startup")
+async def startup_event():
+    """Log startup information"""
+    logger.info("=" * 60)
+    logger.info("Crop Recommendation System Starting...")
+    logger.info(f"Base Directory: {BASE_DIR}")
+    logger.info(f"Static Files: {static_path if static_path else 'Not found'}")
+    logger.info("=" * 60)
 
 # ================== RUN (for local testing) ==================
 if __name__ == "__main__":
