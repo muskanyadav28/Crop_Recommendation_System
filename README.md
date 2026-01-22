@@ -1,6 +1,6 @@
 # Crop Recommendation System
 
-An intelligent crop recommendation system that uses Machine Learning to suggest the most suitable crops based on soil nutrients and environmental conditions.
+An intelligent crop recommendation system that uses Machine Learning to suggest the most suitable crops based on soil nutrients and environmental conditions.By which farmers can save themselves from facing a huge loss due to less crop yield.
 
 ## Features
 
